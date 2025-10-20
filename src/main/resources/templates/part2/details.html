@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{part2/layout}">
+<body>
+<div layout:fragment="content">
+    <h2 class="mb-3">Task Details</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <p><strong>ID:</strong> <span th:text="${task.id}"></span></p>
+            <p><strong>Name:</strong> <span th:text="${task.name}"></span></p>
+            <p><strong>Deadline:</strong> <span th:text="${task.deadlineDate}"></span></p>
+            <p><strong>Status:</strong>
+                <span th:text="${task.completed ? 'Done' : 'Pending'}"
+                      th:classappend="${task.completed} ? 'text-success' : 'text-warning'"></span>
+            </p>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a th:href="@{/part2}" class="btn btn-secondary">Back</a>
+        <a th:href="@{'/part2/edit/' + ${task.id}}" class="btn btn-primary">Edit</a>
+        <a th:href="@{'/part2/delete/' + ${task.id}}" class="btn btn-danger">Delete</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{part2/layout}">
+<body>
+<div layout:fragment="content">
+    <h2>Task Manager</h2>
+    <a th:href="@{/part2/add}" class="btn btn-primary mb-3">Add Task</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr><th>ID</th><th>Name</th><th>Deadline</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="t : ${tasks}">
+            <td th:text="${t.id}"></td>
+            <td th:text="${t.name}"></td>
+            <td th:text="${t.deadlineDate}"></td>
+            <td>
+                <span th:text="${t.completed ? 'Done' : 'Pending'}"
+                      th:classappend="${t.completed} ? 'text-success' : 'text-warning'"></span>
+            </td>
+            <td>
+                <a th:href="@{'/part2/details/' + ${t.id}}" class="btn btn-info btn-sm">View</a>
+                <a th:href="@{'/part2/edit/' + ${t.id}}" class="btn btn-warning btn-sm">Edit</a>
+                <a th:href="@{'/part2/delete/' + ${t.id}}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
